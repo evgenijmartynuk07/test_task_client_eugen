@@ -34,7 +34,7 @@ class MessageService(object):
         return {'status': 'success', 'message': 'Message saved successfully.'}
 
     @property
-    def all_messages(self) -> list:
+    def get_messages(self) -> list:
         """
         Get all saved messages.
 
