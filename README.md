@@ -65,3 +65,23 @@ The `EmailVerificationClient` demonstrates how to use an email verification serv
     verification_result = email_client.verify_and_store_email(email, api_key)
     print(verification_result)
 ```
+
+## EmailVerificationService
+verifier_email.py
+
+The `EmailVerificationService` is a service class for verifying email addresses, including CRUD operations for managing verification results.
+
+### CRUD Operations
+```python
+#Save a Result
+EmailVerificationService.save_result(verification_result)
+
+#Get All Results
+results = EmailVerificationService.get_all_results
+
+#Update Result for Specific Email
+updated_result = EmailVerificationService.update_result(email, new_data)
+
+#Delete Result for Specific Email
+deletion_result = EmailVerificationService.delete_result(email)
+```
