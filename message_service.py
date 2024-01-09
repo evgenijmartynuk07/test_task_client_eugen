@@ -20,7 +20,7 @@ class MessageService(object):
     messages = []
 
     @classmethod
-    def save_message(cls, message: any) -> dict:
+    def save_message(cls, message: str) -> dict:
         """
         Save a message to the messages list.
 

@@ -3,7 +3,7 @@
 
 import requests
 
-from message_client import MessageService
+from message_service import MessageService
 from verifier_email import EmailVerificationClient, EmailVerificationService
 
 
@@ -40,24 +40,20 @@ class JSONPlaceholderClient(object):
             dict: JSON response containing user information.
         """
         endpoint = '/users/{0}'.format(user_id)
-        url = self.base_url + endpoint
-        response = requests.get(url, timeout=10)
-        return response.json()
+        return self._make_request(requests.get, endpoint)
 
     def get_posts(self, user_id: int) -> list:
         """
-        Retrieve posts associated with a user.
+        Get posts associated with a user by user ID.
 
         Args:
             user_id (int): The ID of the user.
 
         Returns:
-            list: A list of posts associated with the user.
+            list: List of posts associated with the user.
         """
         endpoint = '/posts?userId={0}'.format(user_id)
-        url = self.base_url + endpoint
-        response = requests.get(url, timeout=10)
-        return response.json()
+        return self._make_request(requests.get, endpoint)
 
     def create_post(self, user_id: int, title: str, body: str) -> dict:
         """
@@ -72,13 +68,27 @@ class JSONPlaceholderClient(object):
             dict: JSON response containing information about the created post.
         """
         endpoint = '/posts'
-        url = self.base_url + endpoint
         post_data = {
             'userId': user_id,
             'title': title,
             'body': body,
         }
-        response = requests.post(url, json=post_data, timeout=10)
+        return self._make_request(requests.post, endpoint, post_data)
+
+    def _make_request(self, method, endpoint, post_data=None) -> dict | list:
+        """
+        Make a request to the specified endpoint using the given HTTP method.
+
+        Args:
+            method (callable): The HTTP method function (e.g., requests.get, requests.post).
+            endpoint (str): The API endpoint to send the request to.
+            post_data (dict, optional): The data to be sent with the request as JSON. Defaults to None.
+
+        Returns:
+            dict: JSON response from the API.
+        """
+        url = self.base_url + endpoint
+        response = method(url, json=post_data) if post_data else method(url)
         return response.json()
 
 
