@@ -3,7 +3,7 @@
 This project demonstrates the usage of various API clients and services, including a client for the JSONPlaceholder API, a message service, and an email verification service.
 
 ## JSONPlaceholderClient
-main.py
+placeholder_client.py
 
 The `JSONPlaceholderClient` is a client for interacting with the JSONPlaceholder API. It provides methods to retrieve user information, get user posts, and create new posts on the JSONPlaceholder API.
 
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 ```
 
 ## MessageService
-message_client.py
+message_service.py
 
 The `MessageService` is a simple message service that allows saving and retrieving messages.
 
